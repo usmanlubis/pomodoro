@@ -1,0 +1,27 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.action-button {
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  opacity: .6;
+  color: var(--text);
+  padding: .1em;
+}
+
+.action-button:hover {
+  opacity: 1;
+}
+
+.action-button:active {
+  opacity: .3;
+}

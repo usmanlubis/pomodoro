@@ -1,0 +1,10 @@
+.pomodoro {
+  width: 100%;
+  max-width: 600px;
+  border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
