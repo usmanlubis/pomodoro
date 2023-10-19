@@ -1,0 +1,25 @@
+.footer {
+  padding: .5em;
+  background-color: var(--secondary);
+  border-top: 2px solid var(--border-color);
+  color: var(--text)
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-content__link {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.footer-content__link:hover {
+  text-decoration: underline;
+  opacity: .85;
+}
+
+.footer-content__link:active {
+  text-decoration: underline;
+  opacity: .95;
+}
