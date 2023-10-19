@@ -1,0 +1,19 @@
+.header {
+  background-color: var(--secondary);
+  padding: 1em 2em;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text)
+}
+
+.header-brand {
+  text-decoration: none;
+  color: white;
+}
+
+.header-brand:hover {
+  opacity: .9;
+}
+
+.header-brand:active {
+  opacity: .95;
+}
