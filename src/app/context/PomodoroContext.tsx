@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import { createContext, ReactNode, useState, useEffect, useRef } from "react";
 
 interface PomodoroContextType {
@@ -124,8 +123,8 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
       setMessage(`Sesi ${prevState + 1}`)
       return ++prevState
     });
-    setMinute(0);
-    setSecond(10);
+    setMinute(25);
+    setSecond(0);
   }
 
   const handleRest = () => {
@@ -134,14 +133,14 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setOpenSessionEndModal(false);
 
     if (currentSession % 4 === 0) {
-      setMinute(0);
-      setSecond(15);
+      setMinute(30);
+      setSecond(0);
       setMessage('Istirahat panjang')
       return;
     }
 
-    setMinute(0);
-    setSecond(5);
+    setMinute(5);
+    setSecond(0);
     setMessage('Istirahat singkat')
   }
 
@@ -149,8 +148,8 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setIsSession(true);
     setIsRest(false);
     setOpenRestEndModal(false);
-    setMinute(0);
-    setSecond(10);
+    setMinute(25);
+    setSecond(0);
     setCurrentSession((prevState) => {
       setMessage(`Sesi ${prevState + 1}`)
       return ++prevState
