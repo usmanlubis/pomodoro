@@ -16,6 +16,9 @@ interface PomodoroContextType {
   openPomodoroEndModal: boolean;
   handleStop: () => void;
   handleRestart: () => void;
+  handlePause: () => void;
+  handleContinue: () => void;
+  isRunning: boolean;
 };
 
 const initialPomodoroContext: PomodoroContextType = {
@@ -32,6 +35,9 @@ const initialPomodoroContext: PomodoroContextType = {
   openPomodoroEndModal: false,
   handleStop: () => {},
   handleRestart: () => {},
+  handlePause: () => {},
+  handleContinue: () => {},
+  isRunning: false,
 };
 
 const PomodoroContext = createContext<PomodoroContextType>(initialPomodoroContext);
@@ -158,8 +164,16 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     }
   }
 
+  const handlePause = () => {
+    setIsRunning(false);
+  }
+
+  const handleContinue = () => {
+    setIsRunning(true);
+  }
+
   return (
-    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop, handleRestart }}>
+    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop, handleRestart, handlePause, handleContinue, isRunning }}>
       {children}
     </PomodoroContext.Provider>
   );
