@@ -15,7 +15,7 @@ export default function Buttons() {
       { ctx.isFirstTime
         ? <button className={styles['action-button']} onClick={ctx.handleStart}><BsFillPlayFill /></button>
         : <>
-            <button className={styles['action-button']}><VscDebugRestart /></button>
+            <button className={styles['action-button']} onClick={ctx.handleRestart}><VscDebugRestart /></button>
             <button className={styles['action-button']} onClick={ctx.handleStart}><BsFillPlayFill /></button>
             <button className={styles['action-button']} onClick={ctx.handleStop}><BsFillStopFill /></button>
           </>
