@@ -7,3 +7,8 @@
   align-items: center;
   gap: 1em;
 }
+
+.pomodoro>p {
+  color: var(--text);
+  text-align: center;
+}

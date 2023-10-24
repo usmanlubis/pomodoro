@@ -19,6 +19,7 @@ interface PomodoroContextType {
   handlePause: () => void;
   handleContinue: () => void;
   isRunning: boolean;
+  message: string;
 };
 
 const initialPomodoroContext: PomodoroContextType = {
@@ -38,6 +39,7 @@ const initialPomodoroContext: PomodoroContextType = {
   handlePause: () => {},
   handleContinue: () => {},
   isRunning: false,
+  message: '',
 };
 
 const PomodoroContext = createContext<PomodoroContextType>(initialPomodoroContext);
@@ -60,6 +62,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
   const [openSessionEndModal, setOpenSessionEndModal] = useState(false);
   const [openRestEndModal, setOpenRestEndModal] = useState(false);
   const [openPomodoroEndModal, setOpenPomodoroEndModal] = useState(false);
+  const [message, setMessage] = useState('Selamat datang, silahkan masukkan jumlah sesi yang kamu inginkan')
 
   useEffect(() => {
     let intervalId : NodeJS.Timeout;
@@ -97,6 +100,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setSession(session);
     setIsInitialized(true);
     setIsFirstTime(true);
+    setMessage('Klik tombol mulai')
   }
 
   const handleStart = () => {
@@ -105,7 +109,10 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     }
     setIsRunning(true);
     setIsSession(true);
-    setCurrentSession((prevState) => ++prevState);
+    setCurrentSession((prevState) => {
+      setMessage(`Sesi ${prevState + 1}`)
+      return ++prevState
+    });
     setMinute(0);
     setSecond(10);
   }
@@ -118,11 +125,13 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     if (currentSession % 4 === 0) {
       setMinute(0);
       setSecond(15);
+      setMessage('Istirahat panjang')
       return;
     }
 
     setMinute(0);
     setSecond(5);
+    setMessage('Istirahat singkat')
   }
 
   const handleToNextSession = () => {
@@ -131,7 +140,10 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setOpenRestEndModal(false);
     setMinute(0);
     setSecond(10);
-    setCurrentSession((prevState) => ++prevState)
+    setCurrentSession((prevState) => {
+      setMessage(`Sesi ${prevState + 1}`)
+      return ++prevState
+    });
   }
 
   const handleStop = () => {
@@ -147,6 +159,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setOpenSessionEndModal(false);
     setOpenRestEndModal(false);
     setOpenPomodoroEndModal(false);
+    setMessage('Selamat datang, silahkan masukkan jumlah sesi yang kamu inginkan');
   }
 
   const handleRestart = () => {
@@ -173,7 +186,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
   }
 
   return (
-    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop, handleRestart, handlePause, handleContinue, isRunning }}>
+    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop, handleRestart, handlePause, handleContinue, isRunning, message }}>
       {children}
     </PomodoroContext.Provider>
   );

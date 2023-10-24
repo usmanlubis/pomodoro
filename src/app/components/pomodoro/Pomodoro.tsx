@@ -17,6 +17,7 @@ export default function Pomodoro() {
 
 	return (
 		<section className={styles.pomodoro}>
+			<p>{ctx.message}</p>
 			{ctx.openSessionEndModal && <SessionEndModal />}
 			{ctx.openRestEndModal && <RestEndModal />}
 			{ctx.openPomodoroEndModal && <PomodoroEndModal />}
