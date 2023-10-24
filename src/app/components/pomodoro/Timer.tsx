@@ -1,6 +1,7 @@
+'use client';
 import { useContext } from 'react';
 
-import PomodoroContext from '../../context/PomodoroContext';
+import PomodoroContext from '@/app/context/PomodoroContext';
 
 import styles from './Timer.module.css';
 

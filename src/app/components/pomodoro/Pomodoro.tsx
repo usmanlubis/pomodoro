@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useContext } from 'react';
 
@@ -8,7 +8,7 @@ import Buttons from './Buttons';
 import SessionEndModal from '../modal/SessionEndModal';
 import RestEndModal from '../modal/RestEndModal';
 import PomodoroEndModal from '../modal/PomodoroEndModal';
-import PomodoroContext from '../../context/PomodoroContext';
+import PomodoroContext from '@/app/context/PomodoroContext';
 
 import styles from './Pomodoro.module.css';
 

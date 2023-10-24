@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import { useState, useContext } from 'react';
 
-import PomodoroContext from '../../context/PomodoroContext';
+import PomodoroContext from '@/app/context/PomodoroContext';
 
 import styles from './InputForm.module.css';
 
