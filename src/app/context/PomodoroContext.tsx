@@ -70,10 +70,10 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     let intervalId : NodeJS.Timeout;
 
     const playSound = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
     }
-  }
 
     const handleModal = () => {
       if (session === currentSession) {
@@ -86,8 +86,8 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     }
 
     if (currentSession && !second && !minute) {
-      playSound();
       handleModal();
+      playSound();
     } else if (isRunning) {
         intervalId = setInterval(() => {
           if (second === 0 && minute === 0) {
