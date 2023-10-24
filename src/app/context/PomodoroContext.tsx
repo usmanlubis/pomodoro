@@ -13,6 +13,8 @@ interface PomodoroContextType {
   handleRest: () => void;
   openRestEndModal: boolean;
   handleToNextSession: () => void;
+  openPomodoroEndModal: boolean;
+  handleStop: () => void;
 };
 
 const initialPomodoroContext: PomodoroContextType = {
@@ -26,6 +28,8 @@ const initialPomodoroContext: PomodoroContextType = {
   handleRest: () => {},
   openRestEndModal: false,
   handleToNextSession: () => {},
+  openPomodoroEndModal: false,
+  handleStop: () => {},
 };
 
 const PomodoroContext = createContext<PomodoroContextType>(initialPomodoroContext);
@@ -47,11 +51,14 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
   const [second, setSecond] = useState(0);
   const [openSessionEndModal, setOpenSessionEndModal] = useState(false);
   const [openRestEndModal, setOpenRestEndModal] = useState(false);
+  const [openPomodoroEndModal, setOpenPomodoroEndModal] = useState(false);
 
   useEffect(() => {
     let intervalId : NodeJS.Timeout;
     const handleModal = () => {
-      if (isSession) {
+      if (session === currentSession) {
+        setOpenPomodoroEndModal(true);
+      } else if (isSession) {
         setOpenSessionEndModal(true);
       } else if (isRest) {
         setOpenRestEndModal(true);
@@ -76,7 +83,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     return () => {
       clearInterval(intervalId);
     };
-  }, [second, minute, isRunning, currentSession, isSession, isRest]);
+  }, [second, minute, isRunning, currentSession, isSession, isRest, session]);
 
   const handleInit = (session: number) => {
     setSession(session);
@@ -101,8 +108,8 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setOpenSessionEndModal(false);
 
     if (currentSession % 4 === 0) {
-      setMinute(30);
-      setSecond(0);
+      setMinute(0);
+      setSecond(15);
       return;
     }
 
@@ -119,8 +126,23 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setCurrentSession((prevState) => ++prevState)
   }
 
+  const handleStop = () => {
+    setIsInitialized(false);
+    setSession(0);
+    setCurrentSession(0);
+    setIsSession(false);
+    setIsRest(false);
+    setIsFirstTime(false);
+    setIsRunning(false);
+    setMinute(0);
+    setSecond(0);
+    setOpenSessionEndModal(false);
+    setOpenRestEndModal(false);
+    setOpenPomodoroEndModal(false);
+  }
+
   return (
-    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession }}>
+    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop }}>
       {children}
     </PomodoroContext.Provider>
   );

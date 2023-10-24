@@ -13,7 +13,7 @@ export default function SessionEndModal() {
       <div className={styles.modal}>
         <p>Istirahat selesai, selamat bekerja kembali!</p>
         <div>
-          <button onClick={ctx.handleToNextSession}>OK!</button>
+          <button onClick={ctx.handleToNextSession}>Lanjutkan</button>
         </div>
       </div>
     </div>

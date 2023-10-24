@@ -11,9 +11,9 @@ export default function SessionEndModal() {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <p style={{ fontSize: '2rem' }}>Sesi berakhir</p>
+        <p>Selamat, semua sesi telah selesai!</p>
         <div>
-          <button onClick={ctx.handleRest}>Istirahat</button>
+          <button onClick={ctx.handleStop}>OK!</button>
         </div>
       </div>
     </div>

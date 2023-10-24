@@ -13,11 +13,11 @@ export default function Buttons() {
   return (
     <section className={styles.buttons}>
       { ctx.isFirstTime
-        ? <button className={styles['action-button']}><BsFillPlayFill onClick={ctx.handleStart} /></button>
+        ? <button className={styles['action-button']} onClick={ctx.handleStart}><BsFillPlayFill /></button>
         : <>
             <button className={styles['action-button']}><VscDebugRestart /></button>
-            <button className={styles['action-button']}><BsFillPlayFill onClick={ctx.handleStart} /></button>
-            <button className={styles['action-button']}><BsFillStopFill /></button>
+            <button className={styles['action-button']} onClick={ctx.handleStart}><BsFillPlayFill /></button>
+            <button className={styles['action-button']} onClick={ctx.handleStop}><BsFillStopFill /></button>
           </>
       }
       
