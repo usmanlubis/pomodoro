@@ -1,23 +1,29 @@
 "use client";
 
-import { useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import PomodoroContext from '../../context/PomodoroContext';
 
 import styles from './InputForm.module.css';
 
 export default function Form() {
-  const input = useRef();
+  // const input = useRef<HTMLInputElement>();
+  const [input, setInput] = useState('')
   const ctx = useContext(PomodoroContext);
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(input);
+    if (+input > 0) {
+      ctx.handleInit(+input);
+      setInput('');
+    } else {
+      return;
+    }
   }
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
-      <input type="number" placeholder="Masukkan jumlah sesi" required />
+      <input type="number" placeholder="Masukkan jumlah sesi" required value={input} onChange={(e) => setInput(e.target.value)} />
       <div>
         <button type="submit">Ok</button>
       </div>
