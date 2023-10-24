@@ -23,6 +23,7 @@ export default function Pomodoro() {
 			{ctx.openPomodoroEndModal && <PomodoroEndModal />}
 			<Timer />
 			{ctx.isInitialized ? <Buttons /> : <InputForm />}
+			<audio ref={ctx.audioRef} src="/audio/bell.mp3" />
 		</section>
 	);
 }

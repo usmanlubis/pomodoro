@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, ReactNode, useState, useEffect, useRef } from "react";
 
 interface PomodoroContextType {
   isInitialized: boolean;
@@ -20,6 +20,7 @@ interface PomodoroContextType {
   handleContinue: () => void;
   isRunning: boolean;
   message: string;
+  audioRef: React.RefObject<HTMLAudioElement> | null;
 };
 
 const initialPomodoroContext: PomodoroContextType = {
@@ -40,6 +41,7 @@ const initialPomodoroContext: PomodoroContextType = {
   handleContinue: () => {},
   isRunning: false,
   message: '',
+  audioRef: null,
 };
 
 const PomodoroContext = createContext<PomodoroContextType>(initialPomodoroContext);
@@ -63,9 +65,17 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
   const [openRestEndModal, setOpenRestEndModal] = useState(false);
   const [openPomodoroEndModal, setOpenPomodoroEndModal] = useState(false);
   const [message, setMessage] = useState('Selamat datang, silahkan masukkan jumlah sesi yang kamu inginkan')
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     let intervalId : NodeJS.Timeout;
+
+    const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  }
+
     const handleModal = () => {
       if (session === currentSession) {
         setOpenPomodoroEndModal(true);
@@ -77,6 +87,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     }
 
     if (currentSession && !second && !minute) {
+      playSound();
       handleModal();
     } else if (isRunning) {
         intervalId = setInterval(() => {
@@ -186,7 +197,7 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
   }
 
   return (
-    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop, handleRestart, handlePause, handleContinue, isRunning, message }}>
+    <PomodoroContext.Provider value={{ isInitialized, isFirstTime, minute, second, handleInit, handleStart, openSessionEndModal, handleRest, openRestEndModal, handleToNextSession, openPomodoroEndModal, handleStop, handleRestart, handlePause, handleContinue, isRunning, message, audioRef }}>
       {children}
     </PomodoroContext.Provider>
   );
