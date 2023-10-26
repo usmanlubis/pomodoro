@@ -2,7 +2,10 @@
   background-color: var(--secondary);
   padding: 1em 2em;
   border-bottom: 2px solid var(--border-color);
-  color: var(--text)
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-brand {
@@ -16,4 +19,22 @@
 
 .header-brand:active {
   opacity: .95;
+}
+
+.nav-links {
+  list-style-type: none;
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.nav-link:hover {
+  opacity: .8;
+}
+
+.nav-link:active {
+  color: white;
 }
