@@ -1,6 +1,3 @@
-'use client';
-import { useContext } from 'react';
-
 import Header from './components/header/Header';
 import Pomodoro from './components/pomodoro/Pomodoro';
 import Footer from './components/footer/Footer';
