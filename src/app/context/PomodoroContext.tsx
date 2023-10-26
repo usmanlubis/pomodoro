@@ -123,8 +123,8 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
       setMessage(`Sesi ${prevState + 1}`)
       return ++prevState
     });
-    setMinute(25);
-    setSecond(0);
+    setMinute(0);
+    setSecond(5);
   }
 
   const handleRest = () => {
@@ -133,14 +133,14 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setOpenSessionEndModal(false);
 
     if (currentSession % 4 === 0) {
-      setMinute(30);
-      setSecond(0);
+      setMinute(0);
+      setSecond(7);
       setMessage('Istirahat panjang')
       return;
     }
 
-    setMinute(5);
-    setSecond(0);
+    setMinute(0);
+    setSecond(3);
     setMessage('Istirahat singkat')
   }
 
@@ -148,8 +148,8 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
     setIsSession(true);
     setIsRest(false);
     setOpenRestEndModal(false);
-    setMinute(25);
-    setSecond(0);
+    setMinute(0);
+    setSecond(5);
     setCurrentSession((prevState) => {
       setMessage(`Sesi ${prevState + 1}`)
       return ++prevState
@@ -175,15 +175,15 @@ export const PomodoroContextProvider: React.FC<PomodoroContextProviderProps> = (
   const handleRestart = () => {
     if (isRest) {
       if (currentSession % 4 === 0) {
-        setMinute(30);
-        setSecond(0);
+        setMinute(0);
+        setSecond(7);
       } else {
-        setMinute(5);
-        setSecond(0);
+        setMinute(0);
+        setSecond(3);
       }
     } else if (isSession) {
-      setMinute(25);
-      setSecond(0);
+      setMinute(0);
+      setSecond(5);
     }
   }
 
